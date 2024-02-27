@@ -48,7 +48,7 @@ const SearchInput = styled.input`
   margin-left: 15px;
 `;
 
-export const HeaderSection = ({onTextChange, searchQuery}) => {
+const HeaderSection = ({onTextChange, searchQuery}) => {
   return (
     <Header>
         <AppName>
@@ -66,3 +66,5 @@ export const HeaderSection = ({onTextChange, searchQuery}) => {
       </Header>
   )
 }
+
+export default HeaderSection;

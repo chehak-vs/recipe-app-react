@@ -53,7 +53,7 @@ const IngredientsText = styled(SeeMoreText)`
   margin-bottom: 12px;
 `;
 
-export const RecipeCard = (props) => {
+const RecipeCard = (props) => {
     const [show, setShow] = useState("");
     {console.log(props.recipePerPage)
       console.log(props.totalRecipes)
@@ -102,3 +102,5 @@ export const RecipeCard = (props) => {
     </>
   )
 }
+
+export default RecipeCard;

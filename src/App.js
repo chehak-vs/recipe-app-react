@@ -1,10 +1,12 @@
-import {React, useState, useEffect} from "react";
+import React, {useState, useEffect, Suspense} from "react";
 import styled from "styled-components";
-import { HeaderSection } from "./components/Headersection";
-import { RecipeCard } from "./components/RecipeCard";
-import {Placeholder} from "./components/Placeholder";
 import Axios, * as others  from "axios";
 import { Pagination } from "./components/Pagination";
+
+const LazyPlaceholder = React.lazy(() => import("./components/Placeholder"));
+const LazyRecipeCard = React.lazy(() => import("./components/RecipeCard"));
+const LazyHeaderSection = React.lazy(() => import("./components/Headersection"))
+
 
 
 const APP_ID = "6ba04881";
@@ -36,12 +38,6 @@ function App() {
     );
     console.log(response.data.hits);
     updateRecipeList(response.data.hits);
-    // console.log(recipePerPage)
-    // console.log(recipeList.length);
-    // console.log(firstIndex);
-    // console.log(lastIndex);
-    // setSlicedRecipeList(recipeList.slice(firstIndex, lastIndex));
-    // console.log(slicedRecipeList);
   };
 
   const onTextChange = (e) => {
@@ -53,14 +49,21 @@ function App() {
 
   return (
     <Container>
-      <HeaderSection onTextChange={onTextChange} searchQuery={searchQuery} />
+      <Suspense fallback="Loading...">
+      <LazyHeaderSection onTextChange={onTextChange} searchQuery={searchQuery} />
+      </Suspense>
       {recipeList.length ? (
           slicedRecipeList.map((recipe, index) => (
-            <RecipeCard key={index} recipe={recipe.recipe} totalRecipes={recipeList.length} recipePerPage={recipePerPage} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+            <Suspense fallback="Loading...">
+            <LazyRecipeCard key={index} recipe={recipe.recipe} totalRecipes={recipeList.length} recipePerPage={recipePerPage} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+            </Suspense>
             
           ))
         ) : (
-          <Placeholder src="/images/hamburger.svg" />
+          <Suspense fallback="Loading...">
+            <LazyPlaceholder src="/images/hamburger.svg" />
+          </Suspense>
+          
         )}
     <Pagination totalRecipes={recipeList.length} recipePerPage = {recipePerPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />    
     </Container>

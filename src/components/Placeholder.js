@@ -11,8 +11,10 @@ justify-content: center
   opacity: 50%;
 `;
 
-export const Placeholder = ({ src }) => {
+const Placeholder = ({ src }) => {
     return (
         <Placeholder2 src={src} />
     )
 }
+
+export default Placeholder;
