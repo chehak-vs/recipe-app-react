@@ -4,6 +4,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
+import { Pagination } from './Pagination';
 
 const RecipeListContainer = styled.div`
   display: flex;
@@ -54,8 +55,12 @@ const IngredientsText = styled(SeeMoreText)`
 
 export const RecipeCard = (props) => {
     const [show, setShow] = useState("");
+    {console.log(props.recipePerPage)
+      console.log(props.totalRecipes)
+      console.log(props.currentPage)}
 
   return (
+    <>
     <RecipeListContainer>
         <RecipeContainer>
         <Dialog
@@ -91,6 +96,9 @@ export const RecipeCard = (props) => {
             <IngredientsText onClick={() => setShow(!show)}>Ingridients</IngredientsText>
             <SeeMoreText onClick={() => {window.open(props.recipe.url)}}>See Complete Recipe</SeeMoreText>
         </RecipeContainer>
+       
     </RecipeListContainer>
+    
+    </>
   )
 }
