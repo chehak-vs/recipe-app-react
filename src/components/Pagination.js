@@ -11,10 +11,14 @@ export const Pagination = ({ totalRecipes, recipePerPage, currentPage, setCurren
         console.log(pages);
     }
 
+    window.scrollTo({top: 0,
+        behavior: 'smooth'});
+
     return (
         <div className='pagination'>
             {pages.map((page, index) => {
-               return <button key={index} onClick={() => setCurrentPage(page)} className={page == currentPage ? "active" : ""}>
+               return <button key={index} onClick={() => 
+               setCurrentPage(page)} className={page == currentPage ? "active" : ""}>
                 {page}</button>
             })}
             
